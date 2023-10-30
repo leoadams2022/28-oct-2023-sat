@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fade-translate-div {
+  /* opacity: 0; */
+  /* transform: translateY(-100%); */
+  animation: fadeAndTranslate 1s forwards;
+}
+@keyframes fadeAndTranslateTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeAndTranslateBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeAndTranslateRight {
+  0% {
+    opacity: 0;
+    transform: translateX(25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeAndTranslateLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.addColon::after {
+  content: ":";
+  display: inline-block;
+  margin: 0px 2px;
+}
+.addDollar::after {
+  content: "$";
+  margin: 0px 2px;
+  display: inline-block;
+}
+.addStar::after {
+  display: inline-block;
+  content: "\2605";
+  margin: 0px 2px;
+}
+.addGoldStar::after {
+  display: inline-block;
+  content: "\2605";
+  margin: 0px 2px;
+  @apply text-myGold-100;
+}
+.text-stroke {
+  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke-color: black;
+}
+.text-stroke-1 {
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+}
+.text-stroke-2 {
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: black;
+}
+.text-stroke-3 {
+  -webkit-text-stroke: 3px;
+  -webkit-text-stroke-color: black;
+}
+
+.myBtn {
+  @apply w-1/2 mx-auto px-2 py-1 bg-myBlue-200 transition-colors duration-300 ease-in-out hover:bg-myBlue-300 hover:text-white rounded-md;
+}
