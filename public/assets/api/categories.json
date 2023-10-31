@@ -1,0 +1,18 @@
+[
+  {
+    "title": "electronics",
+    "iconLink": "http://localhost:3000/assets/icons/electronics.png"
+  },
+  {
+    "title": "jewelry",
+    "iconLink": "http://localhost:3000/assets/icons/jewelery.png"
+  },
+  {
+    "title": "men's clothing",
+    "iconLink": "http://localhost:3000/assets/icons/mens_clothing.png"
+  },
+  {
+    "title": "women's clothing",
+    "iconLink": "http://localhost:3000/assets/icons/womens_clothing.png"
+  }
+]

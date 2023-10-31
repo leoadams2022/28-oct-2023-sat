@@ -4,22 +4,32 @@ import { useSwipeable } from "react-swipeable";
 export default function Carousel({
   children: slides,
   autoSlideDuration = 5000,
-  autoSlide = "true",
-  controls = "true",
+  autoSlide = true,
+  controls = null,
+  slidesLength = slides.length,
 }) {
   const [curr, setCurr] = useState(0);
   const autoSlideIntervaleRef = useRef();
+  let slidesLengthArr = [];
+  for (let i = 0; i < slidesLength; i++) {
+    slidesLengthArr.push(i);
+  }
+
   const n = () => {
-    if (autoSlide) clearInterval(autoSlideIntervaleRef.current);
-    setCurr((pre) => (pre === slides.length - 1 ? 0 : ++pre));
-    if (autoSlide)
-      autoSlideIntervaleRef.current = setInterval(n, autoSlideDuration);
+    if (slidesLength > 0) {
+      if (autoSlide) clearInterval(autoSlideIntervaleRef.current);
+      setCurr((pre) => (pre === slidesLength - 1 ? 0 : ++pre));
+      if (autoSlide)
+        autoSlideIntervaleRef.current = setInterval(n, autoSlideDuration);
+    }
   };
   const p = () => {
-    if (autoSlide) clearInterval(autoSlideIntervaleRef.current);
-    setCurr((pre) => (pre === 0 ? slides.length - 1 : --pre));
-    if (autoSlide)
-      autoSlideIntervaleRef.current = setInterval(n, autoSlideDuration);
+    if (slidesLength > 0) {
+      if (autoSlide) clearInterval(autoSlideIntervaleRef.current);
+      setCurr((pre) => (pre === 0 ? slidesLength - 1 : --pre));
+      if (autoSlide)
+        autoSlideIntervaleRef.current = setInterval(n, autoSlideDuration);
+    }
   };
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
@@ -87,7 +97,7 @@ export default function Carousel({
             </button>
           </div>
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-full flex justify-center gap-2 ">
-            {slides.map((_, i) => (
+            {slidesLengthArr.map((_, i) => (
               <button
                 key={Math.random()}
                 className={`inline-block w-2 h-2 rounded-full transition duration-500 ease-in-out ${
@@ -100,7 +110,7 @@ export default function Carousel({
         </>
       )}
       {controls === 2 && (
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto flex justify-between gap-2 ">
+        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-auto flex justify-between gap-2 bg-transparent">
           <button
             onClick={p}
             className="w-6 h-6 rounded-full flex justify-center items-center hover:bg-gray-500/50"
@@ -121,7 +131,7 @@ export default function Carousel({
             </svg>
           </button>
           <div>
-            {curr + 1}/{slides.length}
+            {curr + 1}/{slidesLength}
           </div>
           <button
             onClick={n}

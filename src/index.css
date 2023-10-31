@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.fade-translate-div {
-  /* opacity: 0; */
-  /* transform: translateY(-100%); */
-  animation: fadeAndTranslate 1s forwards;
-}
 @keyframes fadeAndTranslateTop {
   0% {
     opacity: 0;

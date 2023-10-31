@@ -61,6 +61,7 @@ function IntersectionObserverComponent({
   }
 
   // Clone the child element and apply the style directly
+
   const childWithStyle = React.cloneElement(children, {
     style: {
       ...children.props.style,
@@ -91,22 +92,24 @@ export default function Fade({
 
   return (
     <>
-      {childElements.map((child, index) => (
-        <IntersectionObserverComponent
-          key={index}
-          root={root}
-          rootMargin={rootMargin}
-          threshold={threshold}
-          direction={direction}
-        >
-          {child}
-        </IntersectionObserverComponent>
-      ))}
+      {childElements.map((child, index) => {
+        return (
+          <IntersectionObserverComponent
+            key={index}
+            root={root}
+            rootMargin={rootMargin}
+            threshold={threshold}
+            direction={direction}
+          >
+            {child}
+          </IntersectionObserverComponent>
+        );
+      })}
     </>
   );
 }
 Fade.defaultProps = {
   root: null,
   rootMargin: "0px",
-  threshold: [0],
+  threshold: [0.5],
 };
