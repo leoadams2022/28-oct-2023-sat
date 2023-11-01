@@ -20,8 +20,9 @@ export default function useFetch(url) {
         setLoading(false);
       }
     };
-
+    // setTimeout(() => {
     fetchData();
+    // }, 5000);
   }, [url]);
 
   return [data, loading, error];

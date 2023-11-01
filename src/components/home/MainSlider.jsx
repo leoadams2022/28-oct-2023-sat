@@ -2,7 +2,6 @@ import React from "react";
 import Carousel from "../shaered/Carousel";
 import { UrlFormate } from "../../utilties/helpersFunctions";
 import { Link } from "react-router-dom";
-import { slideImages } from "../../dataObjects/navbar";
 
 export default function MainSlider({ data, skeleton }) {
   return !skeleton ? (
@@ -15,7 +14,7 @@ export default function MainSlider({ data, skeleton }) {
           <div className="w-full h-[80%] ">
             <Link to={`/${UrlFormate(item.id)}`}>
               <img
-                src={slideImages[i]}
+                src={item.image}
                 alt={item.title}
                 className="w-full h-full object-cover object-top"
                 loading="lazy"

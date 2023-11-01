@@ -1,16 +1,13 @@
 import React from "react";
-import { Tooltip } from "react-tooltip";
 import Fade from "../utilties/Fade";
 import MainSlider from "../components/home/MainSlider";
 import useFetch from "../utilties/useFetch";
-// import Carousel from "../components/shaered/Carousel";
-// import { categoriesObj } from "../dataObjects/navbar";
 import CatergoriesSlider from "../components/home/CatergoriesSlider";
+import OfferCard from "../components/home/OfferCard";
 import { onlyLetters } from "../utilties/helpersFunctions";
-import { Link } from "react-router-dom";
 export default function Home() {
   const [trendingData, trendingLoading, trendingError] = useFetch(
-    "https://fakestoreapi.com/products/category/women's clothing?limit=6"
+    "http://localhost:3000/assets/api/treanding.json"
   );
   const [categoriesData, categoriesLoading, categoriesError] = useFetch(
     "http://localhost:3000/assets/api/categories.json"
@@ -18,23 +15,11 @@ export default function Home() {
   const [offersData, offersLoading, offersError] = useFetch(
     "https://fakestoreapi.com/products"
   );
+  console.log(offersData.length);
   trendingError !== null && console.error(trendingError);
   categoriesError !== null && console.error(categoriesError);
   offersError !== null && console.error(offersError);
-  console.log(offersData[0]);
-  const item = {
-    id: 1,
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 109.95,
-    description:
-      "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    category: "men's clothing",
-    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    rating: {
-      rate: 3.9,
-      count: 120,
-    },
-  };
+
   return (
     <>
       {/* Tranding  */}
@@ -69,72 +54,82 @@ export default function Home() {
         {/* offers  */}
         <div className="mt-4">
           <Fade direction={"left"} threshold={1}>
-            <p className="bg-white/30 text-white text-xl sm:text-2xl md:text-3xl font-bold z-10 px-4 py-2 rounded-md addColon capitalize w-fit ml-2">
+            <p className="bg-white/30 text-white text-xl sm:text-2xl md:text-3xl font-bold z-10 px-4 py-2 rounded-md addColon capitalize w-fit ml-2 mb-4">
               offers
             </p>
           </Fade>
+          {/* cards container */}
           <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-8 justify-items-center">
-            {/* card  */}
-            {!offersLoading &&
+            {/* cards  */}
+            {!offersLoading ? (
               offersData.map((item, i) => {
                 if (i >= 1 && i <= 10) {
                   return (
-                    <div
+                    <OfferCard
+                      offer={item}
                       key={item.id.toString() + onlyLetters(item.title)}
-                      className="w-[300px] h-[450px]  md:w-[225px] md:h-[400px] lg:w-[300px] lg:h-[450px] bg-myGold-100 rounded-b-sm relative group shadow-2xl shadow-myBlue-100/30"
-                    >
-                      <div className="w-full h-[80%] rounded-t-sm">
-                        <Link>
+                      skeleton={offersLoading}
+                      discount={50}
+                    />
+                  );
+                }
+                return false;
+              })
+            ) : (
+              <OfferCard skeleton={offersLoading} />
+            )}
+          </div>
+          {/* Advertisement Div */}
+          <div className="w-full py-16 my-4 bg-[url('https://i.ibb.co/nLZ6hG6/slide-1.jpg')] bg-cover bg-center bg-fixed flexCenter">
+            <Fade discount={"right"}>
+              <div className="w-full py-10 px-4 bg-myBlue-300/60 flex flex-col md:flex-row justify-evenly items-center gap-2">
+                {trendingData.map((item, i) => {
+                  if (i >= 1 && i <= 3) {
+                    const spann =
+                      i < 3 ? (
+                        <span className="text-4xl font-bold">+</span>
+                      ) : (
+                        ""
+                      );
+                    return (
+                      <>
+                        <div className="w-[250px] h-[250px] shadow-md shadow-gray-300/80 relative">
                           <img
                             src={item.image}
                             alt={item.title}
-                            className="w-full h-full object-cover object-top rounded-t-sm"
-                            loading="lazy"
+                            className="w-full h-full object-cover object-top"
                           />
-                        </Link>
-                      </div>
-                      <div
-                        className="w-full h-[20%] relative pt-4 shadow-inner shadow-myBlue-100/30 transition-colors duration-300 ease-in-out group-hover:bg-myGold-200"
-                        data-tooltip-id={
-                          item.id.toString() + onlyLetters(item.title)
-                        }
-                        data-tooltip-content={item.description}
-                        data-tooltip-wrapper="span"
-                      >
-                        <Tooltip
-                          id={item.id.toString() + onlyLetters(item.title)}
-                          style={{
-                            width: "80%",
-                            zIndex: "1",
-                          }}
-                        />
-                        <p className="text-2xl md:text-xl text-center line-clamp-1">
-                          <Link> {item.title}</Link>
-                        </p>
-                        <p className="text-center ">
-                          <Link>{item.category}</Link>
-                        </p>
-                      </div>
-                      <div className="absolute top-2 left-2 flex">
-                        <p className="rounded-full bg-purple-700 px-2 py-1 text-sm font-bold group-hover:animate-pulse">
-                          Offer
-                        </p>
-                      </div>
-                      <div className="absolute bottom-[20%] left-0 w-full flex justify-between px-2 pb-2">
-                        <p className="text-lg text-center text-white w-auto px-2 h-8 bg-slate-950/80 rounded-full group-hover:animate-pulse">
-                          {item.price} $
-                          <span className="px-2 h-full rounded-full addDollar line-through">
-                            {item.price + item.price / 2}
-                          </span>
-                        </p>
-                        <p className="text-lg text-center text-white w-auto px-2 h-8 bg-slate-950/80 rounded-full addGoldStar">
-                          {item.rating.rate}
-                        </p>
-                      </div>
-                    </div>
+                          <div className="absolute bottom-0 right-0 border-t-[40px] border-b-[40px] border-r-[40px] border-l-[40px] border-t-transparent border-l-transparent border-r-black border-b-black shadow-md"></div>
+                        </div>
+                        {spann}
+                      </>
+                    );
+                  }
+                  return false;
+                })}
+              </div>
+            </Fade>
+          </div>
+          {/* cards container */}
+          <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-8 justify-items-center">
+            {/* cards  */}
+            {!offersLoading ? (
+              offersData.map((item, i) => {
+                if (i >= 11 && i <= 100) {
+                  return (
+                    <OfferCard
+                      offer={item}
+                      key={item.id.toString() + onlyLetters(item.title)}
+                      skeleton={offersLoading}
+                      discount={50}
+                    />
                   );
                 }
-              })}
+                return false;
+              })
+            ) : (
+              <OfferCard skeleton={offersLoading} />
+            )}
           </div>
         </div>
       </div>

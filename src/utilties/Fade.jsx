@@ -48,7 +48,7 @@ function IntersectionObserverComponent({
   let animationValue;
   switch (direction) {
     case "bottom":
-      animationValue = "fadeAndTranslateTop 1s forwards";
+      animationValue = "fadeAndTranslateBottom 1s forwards";
       break;
     case "left":
       animationValue = "fadeAndTranslateLeft 1s forwards";

@@ -1,18 +1,18 @@
 [
   {
     "title": "electronics",
-    "iconLink": "http://localhost:3000/assets/icons/electronics.png"
+    "iconLink": "https://i.ibb.co/9bZxPPX/electronics.png"
   },
   {
     "title": "jewelry",
-    "iconLink": "http://localhost:3000/assets/icons/jewelery.png"
+    "iconLink": "https://i.ibb.co/BTxwvkw/jewelery.png"
   },
   {
     "title": "men's clothing",
-    "iconLink": "http://localhost:3000/assets/icons/mens_clothing.png"
+    "iconLink": "https://i.ibb.co/1qF1fZz/mens-clothing.png"
   },
   {
     "title": "women's clothing",
-    "iconLink": "http://localhost:3000/assets/icons/womens_clothing.png"
+    "iconLink": "https://i.ibb.co/T2Fz9PD/womens-clothing.png"
   }
 ]
