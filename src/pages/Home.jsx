@@ -5,6 +5,7 @@ import useFetch from "../utilties/useFetch";
 import CatergoriesSlider from "../components/home/CatergoriesSlider";
 import OfferCard from "../components/home/OfferCard";
 import { onlyLetters } from "../utilties/helpersFunctions";
+import { Link } from "react-router-dom";
 export default function Home() {
   const [trendingData, trendingLoading, trendingError] = useFetch(
     "http://localhost:3000/assets/api/treanding.json"
@@ -22,19 +23,21 @@ export default function Home() {
 
   return (
     <>
-      {/* Tranding  */}
       <div className="w-full h-full relative ">
-        <Fade direction={"left"}>
-          <p className="absolute top-2 left-2 bg-black/30 text-white text-xl sm:text-2xl md:text-3xl font-bold z-10 px-4 py-2 rounded-md addColon capitalize">
-            Tranding
-          </p>
-        </Fade>
-        {/* slider  */}
-        <Fade direction={"top"}>
-          <div className="w-full h-[500px] mx-auto  overflow-hidden box-border shadow-lg shadow-myBlue-200/20">
-            {<MainSlider data={trendingData} skeleton={trendingLoading} />}
-          </div>
-        </Fade>
+        {/* Tranding  */}
+        <>
+          <Fade direction={"left"}>
+            <p className="absolute top-2 left-2 bg-black/30 text-white text-xl sm:text-2xl md:text-3xl font-bold z-10 px-4 py-2 rounded-md addColon capitalize">
+              Tranding
+            </p>
+          </Fade>
+          {/* Tranding slider  */}
+          <Fade direction={"top"}>
+            <div className="w-full h-[500px] mx-auto  overflow-hidden box-border shadow-lg shadow-myBlue-200/20">
+              {<MainSlider data={trendingData} skeleton={trendingLoading} />}
+            </div>
+          </Fade>
+        </>
         {/* categorys  */}
         <div className="mt-4">
           <Fade direction={"left"} threshold={1}>
@@ -93,13 +96,42 @@ export default function Home() {
                       );
                     return (
                       <>
-                        <div className="w-[250px] h-[250px] shadow-md shadow-gray-300/80 relative">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-cover object-top"
-                          />
-                          <div className="absolute bottom-0 right-0 border-t-[40px] border-b-[40px] border-r-[40px] border-l-[40px] border-t-transparent border-l-transparent border-r-black border-b-black shadow-md"></div>
+                        <div className="w-[250px] h-[250px] shadow-md shadow-gray-300/80 relative overflow-hidden ">
+                          <Link to={"/text"}>
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover object-top"
+                            />
+                            <div className="group absolute right-0 top-0 w-1/2 h-full">
+                              <div className="absolute bottom-0 right-0 transition-transform duration-300 ease-in-out translate-x-full group-hover:translate-x-0">
+                                <button
+                                  className="w-12 h-12 p-2 pl-3 pt-3 bg-black/70 transition-colors duration-300 ease-in-out hover:bg-black/50 box-border border border-myBlue-300 rounded-tl-full"
+                                  onClick={(e) => e.preventDefault()}
+                                >
+                                  <img
+                                    src="https://i.ibb.co/MprmZ54/add-to-cart.png"
+                                    alt="add to cart icon"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                            <div className="group absolute left-0 bottom-0 w-12 h-12 bg-myBlue-100 rounded-tr-full animate-pulse hover:animate-none">
+                              <div className="absolute bottom-0 left-0  transition-transform duration-300 ease-in-out -translate-x-full group-hover:translate-x-0">
+                                <button
+                                  className="w-12 h-12 p-2 pr-3 pt-3 bg-black/70 transition-colors duration-300 ease-in-out hover:bg-black/50 box-border border border-myBlue-300 rounded-tr-full"
+                                  onClick={(e) => e.preventDefault()}
+                                >
+                                  <img
+                                    src="https://i.ibb.co/QNpntDK/favorite.png"
+                                    alt="heart icon"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                          </Link>
                         </div>
                         {spann}
                       </>
