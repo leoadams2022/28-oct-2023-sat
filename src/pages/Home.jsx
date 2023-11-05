@@ -4,23 +4,23 @@ import MainSlider from "../components/home/MainSlider";
 import useFetch from "../utilties/useFetch";
 import CatergoriesSlider from "../components/home/CatergoriesSlider";
 import OfferCard from "../components/home/OfferCard";
-import { onlyLetters } from "../utilties/helpersFunctions";
+import { onlyLetters, is_touch_enabled } from "../utilties/helpersFunctions";
 import { Link } from "react-router-dom";
+import OfferCard2 from "../components/home/OfferCard2";
 export default function Home() {
   const [trendingData, trendingLoading, trendingError] = useFetch(
-    "http://localhost:3000/assets/api/treanding.json"
+    "https://leoadams2022.github.io/BizFunding.github.io/api//treanding.json"
   );
   const [categoriesData, categoriesLoading, categoriesError] = useFetch(
-    "http://localhost:3000/assets/api/categories.json"
+    "https://leoadams2022.github.io/BizFunding.github.io/api/categories.json"
   );
   const [offersData, offersLoading, offersError] = useFetch(
-    "https://fakestoreapi.com/products"
+    "https://leoadams2022.github.io/BizFunding.github.io/api/allProducts.json"
   );
-  console.log(offersData.length);
   trendingError !== null && console.error(trendingError);
   categoriesError !== null && console.error(categoriesError);
   offersError !== null && console.error(offersError);
-
+  const isTouchScreen = is_touch_enabled();
   return (
     <>
       <div className="w-full h-full relative ">
@@ -96,42 +96,8 @@ export default function Home() {
                       );
                     return (
                       <>
-                        <div className="w-[250px] h-[250px] shadow-md shadow-gray-300/80 relative overflow-hidden ">
-                          <Link to={"/text"}>
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              className="w-full h-full object-cover object-top"
-                            />
-                            <div className="group absolute right-0 top-0 w-1/2 h-full">
-                              <div className="absolute bottom-0 right-0 transition-transform duration-300 ease-in-out translate-x-full group-hover:translate-x-0">
-                                <button
-                                  className="w-12 h-12 p-2 pl-3 pt-3 bg-black/70 transition-colors duration-300 ease-in-out hover:bg-black/50 box-border border border-myBlue-300 rounded-tl-full"
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  <img
-                                    src="https://i.ibb.co/MprmZ54/add-to-cart.png"
-                                    alt="add to cart icon"
-                                    className="w-full h-full object-cover"
-                                  />
-                                </button>
-                              </div>
-                            </div>
-                            <div className="group absolute left-0 bottom-0 w-12 h-12 bg-myBlue-100 rounded-tr-full animate-pulse hover:animate-none">
-                              <div className="absolute bottom-0 left-0  transition-transform duration-300 ease-in-out -translate-x-full group-hover:translate-x-0">
-                                <button
-                                  className="w-12 h-12 p-2 pr-3 pt-3 bg-black/70 transition-colors duration-300 ease-in-out hover:bg-black/50 box-border border border-myBlue-300 rounded-tr-full"
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  <img
-                                    src="https://i.ibb.co/QNpntDK/favorite.png"
-                                    alt="heart icon"
-                                    className="w-full h-full object-cover"
-                                  />
-                                </button>
-                              </div>
-                            </div>
-                          </Link>
+                        <div className="w-[350px] h-[350px]">
+                          <OfferCard2 offer={item} to="leo" />
                         </div>
                         {spann}
                       </>
