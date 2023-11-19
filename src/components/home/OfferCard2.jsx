@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 export default function OfferCard2({ offer, to = "#" }) {
   const item = offer;
   const isTouchScreen = is_touch_enabled();
-
   return (
     <div className="w-full h-full shadow-md shadow-gray-300/80 relative overflow-hidden ">
       <Link to={to}>
